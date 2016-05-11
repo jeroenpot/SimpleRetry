@@ -1,0 +1,2 @@
+# SimpleRetry
+Simple retry pattern
