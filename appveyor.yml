@@ -1,7 +1,7 @@
 version: 1.0.0.{build}
 skip_tags: true
 before_build:  
-  - nuget restore
+  - nuget restore Source\SimpleRetry.sln
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
