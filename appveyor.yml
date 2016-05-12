@@ -11,7 +11,7 @@ assembly_info:
 build:
   project: Source\SimpleRetry.sln
   publish_nuget: true
-  verbosity: detailed
+  #verbosity: detailed
 environment:
     COVERALLS_REPO_TOKEN:  
         secure: HeQR7z0Shrsw7TJBV7X3Bm9cBRb83JHdenWn25BXDQSVjD1xPxdcasi3vE/5My8G

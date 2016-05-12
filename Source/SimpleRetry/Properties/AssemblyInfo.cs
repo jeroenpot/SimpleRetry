@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("SimpleRetry")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Retry actions if errors happen. Both sync and async supported")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("SimpleRetry")]
