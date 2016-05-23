@@ -16,7 +16,7 @@ environment:
     COVERALLS_REPO_TOKEN:  
         secure: HeQR7z0Shrsw7TJBV7X3Bm9cBRb83JHdenWn25BXDQSVjD1xPxdcasi3vE/5My8G
 after_test: 
-  - Source\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"Source\packages\NUnit.ConsoleRunner.3.2.1\tools\nunit3-console.exe" "-targetargs:""Source\SimpleRetry.UnitTests\bin\Debug\SimpleRetry.UnitTests.dll""" -output:opencoverCoverage.xml -filter:-FluentAssertions.*
+  - Source\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"Source\packages\NUnit.ConsoleRunner.3.2.1\tools\nunit3-console.exe" "-targetargs:""Source\SimpleRetry.UnitTests\bin\Debug\SimpleRetry.UnitTests.dll""" -output:opencoverCoverage.xml -filter:"+[*]* -[*]*FluentAssertions*"
   - Source\packages\coveralls.net.0.6.0\tools\csmacnz.Coveralls.exe --opencover -i opencoverCoverage.xml --repoToken %COVERALLS_REPO_TOKEN% --commitBranch %APPVEYOR_REPO_BRANCH% 
 deploy:
 - provider: NuGet
