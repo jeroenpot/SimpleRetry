@@ -4,7 +4,7 @@ Retry actions
  
 Build status| Coverage Status| NuGet downloads
 ----------- | -------------- | --------------- 
-[![Build status](https://ci.appveyor.com/api/projects/status/h0vo52hogp69ju2t?svg=true)](https://ci.appveyor.com/project/jeroenpot/simpleretry)|[![Coverage Status](https://coveralls.io/repos/github/jeroenpot/SimpleRetry/badge.svg)](https://coveralls.io/github/jeroenpot/simpleretry?branch=)|[![NuGet downloads](https://img.shields.io/nuget/v/simpleretry.svg?maxAge=2592000)](https://www.nuget.org/packages/simpleretry/)
+[![Build status](https://ci.appveyor.com/api/projects/status/h0vo52hogp69ju2t?svg=true)](https://ci.appveyor.com/project/jeroenpot/simpleretry)|[![Coverage Status](https://coveralls.io/repos/github/jeroenpot/SimpleRetry/badge.svg)](https://coveralls.io/github/jeroenpot/SimpleRetry?branch=)|[![NuGet downloads](https://img.shields.io/nuget/v/simpleretry.svg?maxAge=2592000)](https://www.nuget.org/packages/simpleretry/)
 
 
 ##Usage##
