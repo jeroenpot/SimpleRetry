@@ -25,7 +25,7 @@ namespace SimpleRetry
                 throw new ArgumentException($"Retry count cannot be lower then zero. Given value was {retryCount}");
             }
 
-            ValidateTypeParameter(exceptionTypesToHandle);
+            ValidateParameters(retryCount, exceptionTypesToHandle);
 
             var exceptions = new List<Exception>();
             for (int retry = 0; retry < retryCount + 1; retry++)
@@ -69,6 +69,7 @@ namespace SimpleRetry
 
         public static async Task<T> ExecuteAsync<T>(Func<Task<T>> action, TimeSpan retryInterval, int retryCount, Func<Exception, Task> executeOnEveryException = null, Func<Exception, Task> executeBeforeFinalException = null, params Type[] exceptionTypesToHandle)
         {
+            ValidateParameters(retryCount, exceptionTypesToHandle);
             var exceptions = new List<Exception>();
             for (int retry = 0; retry < retryCount + 1; retry++)
             {
