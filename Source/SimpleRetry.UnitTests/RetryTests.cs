@@ -116,9 +116,8 @@ namespace SimpleRetry.UnitTests
         [Test]
         public async Task should_execute_once_and_then_retry_once_async_without_async_specification()
         {
-            int count = await Retry.ExecuteAsync(() => AddOneAsync(2), TimeSpan.FromMilliseconds(100), 1);
-
-            count.Should().Be(2);
+            Action action = async () => { await AddOneAsync(2); };
+            await Retry.ExecuteAsync(action, TimeSpan.FromMilliseconds(100), 1);
         }
 
         [Test]
