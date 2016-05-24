@@ -124,13 +124,6 @@ namespace SimpleRetry
         {
             if (exceptionTypesToHandle != null && exceptionTypesToHandle.Any())
             {
-                foreach (Type type in exceptionTypesToHandle)
-                {
-                    if (type.IsAssignableFrom(typeof(Exception)))
-                    {
-                        // It's an exception!
-                    }
-                }
                 var typesThatAreNotExcpetions = exceptionTypesToHandle.Where(type => IsOfTypeOrInHerits(type, typeof(Exception)) == false).ToList();
                 if (typesThatAreNotExcpetions.Any())
                 {

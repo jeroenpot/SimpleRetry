@@ -128,6 +128,13 @@ namespace SimpleRetry.UnitTests
             _timesCalled.Should().Be(2);
         }
 
+        [Test]
+        public void should_throw_exception_when_retrycount_is_negative()
+        {
+            Action action = () => Retry.Execute(() => AddOne(9), TimeSpan.Zero, -1);
+            action.ShouldThrow<ArgumentException>().WithMessage("Retry count cannot be lower then zero. Given value was -1");
+        }
+
 
         public void AddOne(int stopThrowingExceptionAt)
         {
