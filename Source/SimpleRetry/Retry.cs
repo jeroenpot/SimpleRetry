@@ -20,11 +20,6 @@ namespace SimpleRetry
 
         public static T Execute<T>(Func<T> action, TimeSpan retryInterval, int retryCount, Action<Exception> executeOnEveryException = null, Action<Exception> executeBeforeFinalException = null, params Type[] exceptionTypesToHandle)
         {
-            if (retryCount < 0)
-            {
-                throw new ArgumentException($"Retry count cannot be lower then zero. Given value was {retryCount}");
-            }
-
             ValidateParameters(retryCount, exceptionTypesToHandle);
 
             var exceptions = new List<Exception>();

@@ -146,16 +146,22 @@ namespace SimpleRetry.UnitTests
         [Test]
         public async Task should_call_action_on_final_exception_async()
         {
+            bool succes = false;
             ILog logger = A.Fake<ILog>();
             try
             {
                 await Retry.ExecuteAsync(() => AddOneAsync(10), TimeSpan.FromMilliseconds(100), 3, null, logger.ErrorAsync);
-
             }
-            catch (Exception)
+            catch (Exception exception)
             {
+                exception.Should().BeOfType<AggregateException>();
+                A.CallTo(() => logger.ErrorAsync(A<Exception>.That.Matches(x => x.GetType() == typeof(AggregateException)))).MustHaveHappened(Repeated.Exactly.Times(1));
+                succes = true;
             }
-            A.CallTo(() => logger.ErrorAsync(A<Exception>.That.Matches(x => x.GetType() == typeof(AggregateException)))).MustHaveHappened(Repeated.Exactly.Times(1));
+
+            succes.Should().BeTrue();
+
+
         }
 
         public void AddOne(int stopThrowingExceptionAt)
