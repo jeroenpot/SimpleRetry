@@ -135,6 +135,28 @@ namespace SimpleRetry.UnitTests
             action.ShouldThrow<ArgumentException>().WithMessage("Retry count cannot be lower then zero. Given value was -1");
         }
 
+        [Test]
+        public async Task should_call_action_on_every_exception_async()
+        {
+            ILog logger = A.Fake<ILog>();
+            await Retry.ExecuteAsync(() => AddOneAsync(3), TimeSpan.FromMilliseconds(100), 9, logger.WarnAsync);
+            A.CallTo(() => logger.WarnAsync(A<Exception>.That.Matches(x => x.GetType() == typeof(NotSupportedException)))).MustHaveHappened(Repeated.Exactly.Times(2));
+        }
+
+        [Test]
+        public async Task should_call_action_on_final_exception_async()
+        {
+            ILog logger = A.Fake<ILog>();
+            try
+            {
+                await Retry.ExecuteAsync(() => AddOneAsync(10), TimeSpan.FromMilliseconds(100), 3, null, logger.ErrorAsync);
+
+            }
+            catch (Exception)
+            {
+            }
+            A.CallTo(() => logger.ErrorAsync(A<Exception>.That.Matches(x => x.GetType() == typeof(AggregateException)))).MustHaveHappened(Repeated.Exactly.Times(1));
+        }
 
         public void AddOne(int stopThrowingExceptionAt)
         {
@@ -184,6 +206,9 @@ namespace SimpleRetry.UnitTests
     public interface ILog
     {
         void Warn(Exception exception);
+        Task WarnAsync(Exception exception);
         void Error(Exception exception);
+        Task ErrorAsync(Exception exception);
+
     }
 }
