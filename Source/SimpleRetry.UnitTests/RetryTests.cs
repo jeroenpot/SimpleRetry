@@ -69,6 +69,24 @@ namespace SimpleRetry.UnitTests
         }
 
         [Test]
+        public async Task should_only_catch_given_exceptions_async()
+        {
+            bool success = false;
+            try
+            {
+                await Retry.ExecuteAsync(() => AddOneAsync(100), TimeSpan.FromMilliseconds(1), 10, null, null, typeof(DivideByZeroException));
+
+            }
+            catch (Exception exception)
+            {
+                exception.Should().BeOfType<NotSupportedException>();
+                success = true;
+            }
+
+            success.Should().BeTrue();
+        }
+
+        [Test]
         public void should_catch_child_exception()
         {
             Retry.Execute(() => AddOne(2), TimeSpan.FromMilliseconds(100), 1, null, null, typeof(SystemException));
