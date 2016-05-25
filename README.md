@@ -1,6 +1,11 @@
 Simple Retry
 ==================
-Retry actions
+Retry pattern for .NET
+Features:
+- Supports sync and async
+- Specify time between retries
+- Target specific exceptions
+- Specify actions to execute when exceptions occur
  
 Build status| Coverage Status| NuGet downloads
 ----------- | -------------- | --------------- 
