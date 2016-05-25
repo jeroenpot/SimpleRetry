@@ -9,6 +9,7 @@
     <licenseUrl>https://github.com/jeroenpot/SimpleRetry/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/jeroenpot/SimpleRetry/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
+	<iconUrl>https://github.com/jeroenpot/SimpleRetry/raw/master/retry.png</iconUrl>
     <description>$description$</description>
     <copyright>Copyright 2016</copyright>
     <tags>retry simple simpleretry async</tags>
