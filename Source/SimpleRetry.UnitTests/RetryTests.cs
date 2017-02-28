@@ -178,8 +178,6 @@ namespace SimpleRetry.UnitTests
             }
 
             succes.Should().BeTrue();
-
-
         }
 
         public void AddOne(int stopThrowingExceptionAt)

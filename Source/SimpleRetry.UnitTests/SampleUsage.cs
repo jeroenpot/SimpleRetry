@@ -10,13 +10,21 @@ namespace SimpleRetry.UnitTests
         public void RetryWithoutReturnValue()
         {
             // Execute the DoWork a maximum of 3 times (once + two retries)
-            Retry.Execute(() => DummyMethods.DoWork("Hello world"), TimeSpan.FromMilliseconds(100), 2);
+            Retry.Execute(() =>
+            {
+                // Happy flow
+            }, 
+            TimeSpan.FromMilliseconds(100), 2);
         }
 
         public void RetryWithReturnValue()
         {
             // Execute the DoWork Once (once + no retries)
-            int returnValue = Retry.Execute(() => DummyMethods.DoWorkAndReturn("Hello world"), TimeSpan.FromMilliseconds(100), 0);
+            int returnValue = Retry.Execute(() =>
+            {
+                // Happy flow
+                return 1;
+            }, TimeSpan.FromMilliseconds(100), 0);
         }
 
         public void RetryOnlySpecificException()
@@ -61,7 +69,19 @@ namespace SimpleRetry.UnitTests
         public async Task RetryAsync()
         {
             // Execute the DoWorkAsync
-            await Retry.ExecuteAsync(async () => await DummyMethods.DoWorkAsync(), TimeSpan.FromMilliseconds(100), 2);
+            await Retry.ExecuteAsync(async () =>
+            {
+                await DummyMethods.DoWorkAsync();
+            }, TimeSpan.FromMilliseconds(100), 2);
+        }
+
+        public async Task RetryAsyncWithReturn()
+        {
+            // Execute the DoWorkAsync
+            int i = await Retry.ExecuteAsync(async () =>
+            {
+                return await DummyMethods.DoWorkAsyncAndReturn();
+            }, TimeSpan.FromMilliseconds(100), 2);
         }
 
         public async Task RetryAsyncWithAllFeatures()
@@ -96,6 +116,12 @@ namespace SimpleRetry.UnitTests
         public static async Task DoWorkAsync()
         {
             await Task.Delay(1);
+        }
+
+        public static async Task<int> DoWorkAsyncAndReturn()
+        {
+            await Task.Delay(1);
+            return 1;
         }
 
         public static async Task ExecuteOnExceptionAsync(Exception exception)
