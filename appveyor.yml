@@ -1,5 +1,6 @@
 version: 1.0.1.{build}
 skip_tags: true
+configuration: Release
 before_build:  
   - nuget restore Source\SimpleRetry.sln
 assembly_info:
@@ -16,8 +17,8 @@ environment:
     COVERALLS_REPO_TOKEN:  
         secure: HeQR7z0Shrsw7TJBV7X3Bm9cBRb83JHdenWn25BXDQSVjD1xPxdcasi3vE/5My8G
 after_test: 
-  - Source\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"Source\packages\NUnit.ConsoleRunner.3.2.1\tools\nunit3-console.exe" "-targetargs:""Source\SimpleRetry.UnitTests\bin\Debug\SimpleRetry.UnitTests.dll""" -output:opencoverCoverage.xml -filter:"+[*]* -[*]*FluentAssertions*" -excludebyfile:"*SampleUsage.cs;*Tests.cs"
-  - Source\packages\coveralls.net.0.6.0\tools\csmacnz.Coveralls.exe --opencover -i opencoverCoverage.xml --repoToken %COVERALLS_REPO_TOKEN% --commitBranch %APPVEYOR_REPO_BRANCH% 
+  - Source\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"Source\packages\NUnit.Runners.2.6.4\tools\nunit-console.exe" "-targetargs:""Source\SimpleRetry.UnitTests\bin\Release\SimpleRetry.UnitTests.dll""" -output:opencoverCoverage.xml -filter:"+[*]* -[*]*FluentAssertions*" -excludebyfile:"*SampleUsage.cs;*Tests.cs"
+  - Source\packages\coveralls.net.0.7.0\tools\csmacnz.Coveralls.exe --opencover -i opencoverCoverage.xml --repoToken %COVERALLS_REPO_TOKEN% --commitBranch %APPVEYOR_REPO_BRANCH% 
 deploy:
 - provider: NuGet
   api_key:
