@@ -14,4 +14,8 @@
     <copyright>Copyright 2016</copyright>
     <tags>retry simple simpleretry async</tags>
   </metadata>
+  <files>
+    <file src="bin\$configuration$\SimpleRetry.dll" target="lib\netstandard1.0\SimpleRetry.dll" />
+    <file src="bin\$configuration$\SimpleRetry.xml" target="lib\netstandard1.0\SimpleRetry.xml" />
+  </files>
 </package>
